@@ -509,7 +509,9 @@ func (wj *journey) RunTests() error {
 		}
 		// put a default accountid and statement id in the journey context for those tests that haven't got a token that can call /accounts
 		wj.context.PutString(CtxConsentedAccountID, wj.config.resourceIDs.AccountIDs[0].AccountID)
-		wj.context.PutString(CtxStatementID, wj.config.resourceIDs.StatementIDs[0].StatementID)
+		if len(wj.config.resourceIDs.StatementIDs) > 0 {
+			wj.context.PutString(CtxStatementID, wj.config.resourceIDs.StatementIDs[0].StatementID)
+		}
 	}
 
 	requiredTokens := wj.permissions

@@ -294,7 +294,11 @@ func notEmpty(key, value interface{}) (bool, string) {
 		}
 
 		if emStmts {
-			return false, fmt.Sprintf("%s.StatementIDs is empty", key)
+			// TODO: Proper validations are required:
+			// Combine a set of conditions based on the discovery / config structs with the conditions on the tag (not_empty etc..)
+			// Nested items must be validated recursively, based on their own tags instead of the parent items tags (use reflect)
+			//
+			// return false, fmt.Sprintf("%s.StatementIDs is empty", key)
 		}
 		// Some nested validation here, not great but need to think about validation for nested values
 		for i, v := range v.StatementIDs {

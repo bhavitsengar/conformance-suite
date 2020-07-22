@@ -68,7 +68,9 @@ func PutParametersToJourneyContext(config JourneyConfig, context model.Context) 
 	context.PutString(CtxConstResourceBaseURL, config.resourceBaseURL)
 	context.PutString(CtxAPIVersion, config.apiVersion)
 	context.PutString(CtxConsentedAccountID, config.resourceIDs.AccountIDs[0].AccountID)
-	context.PutString(CtxStatementID, config.resourceIDs.StatementIDs[0].StatementID)
+	if len(config.resourceIDs.StatementIDs) > 0 {
+		context.PutString(CtxStatementID, config.resourceIDs.StatementIDs[0].StatementID)
+	}
 	context.PutString(CtxInternationalCreditorSchema, config.internationalCreditorAccount.SchemeName)
 	context.PutString(CtxInternationalCreditorIdentification, config.internationalCreditorAccount.Identification)
 	context.PutString(CtxInternationalCreditorName, config.internationalCreditorAccount.Name)

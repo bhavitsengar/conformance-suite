@@ -993,16 +993,18 @@ export default {
       );
     },
     requiresStatementID() {
-      // If the discovery model has endpoints which contain 'statement' 
+      // If the discovery model has endpoints which contain 'statement'
       // then statement ID(s) must be included in the configuration.
       // NOTE: there might be better ways to check (e.g. matching for exact path)
-      for (var item of this.$store.state.config.discoveryModel.discoveryModel.discoveryItems) {
-        for (var endpoint of item.endpoints) {
-          if (endpoint.path.includes("statement")) {
+      /*eslint-disable */
+      for (const item of this.$store.state.config.discoveryModel.discoveryModel.discoveryItems) {
+        for (const endpoint of item.endpoints) {
+          if (endpoint.path.includes('statement')) {
             return true;
           }
         }
       }
+      /* eslint-enable */
       return false;
     },
     addResourceAccountIDField(value) {

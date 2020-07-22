@@ -264,7 +264,7 @@ export const state = {
     signature_trust_anchor: '',
     resource_ids: {
       account_ids: [{ account_id: '' }],
-      statement_ids: [{ statement_id: '' }],
+      statement_ids: [],
     },
     creditor_account: {
       scheme_name: '',

@@ -229,10 +229,12 @@ export default {
     if (_.isEmpty(state.configuration.resource_ids.account_ids) || state.configuration.resource_ids.account_ids[0].account_id.length === 0) {
       errors.push('Account IDs empty');
     }
-    if (_.isEmpty(state.configuration.resource_ids.statement_ids) || state.configuration.resource_ids.statement_ids[0].statement_id.length === 0) {
-      errors.push('Statement IDs empty');
+    var s = state;
+    if (isDiscoveryWithStatement(state.discoveryModel.discoveryModel)) {
+      if (_.isEmpty(state.configuration.resource_ids.statement_ids) || state.configuration.resource_ids.statement_ids[0].statement_id.length === 0) {
+        errors.push('Statement IDs empty');
+      }
     }
-
     if (_.isEmpty(state.configuration.transaction_from_date)) {
       errors.push('Transaction From Date empty');
     } else if (!moment(state.configuration.transaction_from_date, moment.ISO_8601).isValid()) {
@@ -307,3 +309,15 @@ export default {
     commit(types.SET_WIZARD_STEP, step);
   },
 };
+
+function isDiscoveryWithStatement(discoveryModel) {
+  var m = discoveryModel;
+  for (var item of discoveryModel.discoveryItems) {
+    for (var endpoint of item.endpoints) {
+      if (endpoint.path.includes("statement")) {
+        return true;
+      }
+    }
+  }
+  return false;
+}

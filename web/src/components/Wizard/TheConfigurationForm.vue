@@ -63,6 +63,7 @@
         </b-form-group>
 
         <b-form-group
+          v-if="requiresStatementID()"
           id="resource_statement_id_group"
           label-for="resource_statement_ids"
           label="Statement IDs"
@@ -79,10 +80,9 @@
             <b-form-input
               :id="`resource_statement_ids-${index}`"
               :value="item.statement_id"
-              :state="isNotEmpty(item.statement_id)"
+              :state="(isNotEmpty(item.statement_id) || !requiresStatementID())"
               label="Resource - Statement IDs"
               placeholder="At least one Statement ID is required"
-              required
               type="text"
               @input="(value) => { updateStatementId(index, value) }"
             />
@@ -991,6 +991,19 @@ export default {
         this.$store.state.config.configuration.token_endpoint_auth_method
         === 'client_secret_basic'
       );
+    },
+    requiresStatementID() {
+      // If the discovery model has endpoints which contain 'statement' 
+      // then statement ID(s) must be included in the configuration.
+      // NOTE: there might be better ways to check (e.g. matching for exact path)
+      for (var item of this.$store.state.config.discoveryModel.discoveryModel.discoveryItems) {
+        for (var endpoint of item.endpoints) {
+          if (endpoint.path.includes("statement")) {
+            return true;
+          }
+        }
+      }
+      return false;
     },
     addResourceAccountIDField(value) {
       this.$store.commit('config/ADD_RESOURCE_ACCOUNT_ID', {

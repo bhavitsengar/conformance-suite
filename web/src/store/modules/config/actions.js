@@ -11,7 +11,13 @@ const findImageData = (model, images) => {
 };
 
 
-function isDiscoveryWithStatement(discoveryModel) {
+function isDiscoveryWithStatement(state) {
+  const discoveryModel = state.discoveryModel
+  if (!discoveryModel || !discoveryModel.discoveryModel) {
+    // The only valid case for discoveryModel not being set is during testing 
+    return false;
+  }
+
   /*eslint-disable */
   for (const item of discoveryModel.discoveryItems) {
     for (const endpoint of item.endpoints) {
@@ -243,7 +249,8 @@ export default {
     if (_.isEmpty(state.configuration.resource_ids.account_ids) || state.configuration.resource_ids.account_ids[0].account_id.length === 0) {
       errors.push('Account IDs empty');
     }
-    if (isDiscoveryWithStatement(state.discoveryModel.discoveryModel)) {
+
+    if (isDiscoveryWithStatement(state)) {
       if (_.isEmpty(state.configuration.resource_ids.statement_ids) || state.configuration.resource_ids.statement_ids[0].statement_id.length === 0) {
         errors.push('Statement IDs empty');
       }

@@ -69,7 +69,7 @@ describe('web/src/store/modules/config', () => {
         signing_kid: '',
         resource_ids: {
           account_ids: [{ account_id: '' }],
-          statement_ids: [{ statement_id: '' }],
+          statement_ids: [],
         },
         creditor_account: {
           scheme_name: '',
@@ -163,7 +163,7 @@ describe('web/src/store/modules/config', () => {
         redirect_url: 'https://127.0.0.1:8443/conformancesuite/callback',
         resource_ids: {
           account_ids: [{ account_id: '' }],
-          statement_ids: [{ statement_id: '' }],
+          statement_ids: [],
         },
         creditor_account: {
           scheme_name: '',
@@ -219,7 +219,7 @@ describe('web/src/store/modules/config', () => {
         redirect_url: 'https://127.0.0.1:8443/conformancesuite/callback',
         resource_ids: {
           account_ids: [{ account_id: '' }],
-          statement_ids: [{ statement_id: '' }],
+          statement_ids: [],
         },
         creditor_account: {
           scheme_name: '',
@@ -274,7 +274,7 @@ describe('web/src/store/modules/config', () => {
         redirect_url: 'https://127.0.0.1:8443/conformancesuite/callback',
         resource_ids: {
           account_ids: [{ account_id: '' }],
-          statement_ids: [{ statement_id: '' }],
+          statement_ids: [],
         },
         creditor_account: {
           scheme_name: '',
@@ -329,7 +329,7 @@ describe('web/src/store/modules/config', () => {
         redirect_url: 'https://127.0.0.1:8443/conformancesuite/callback',
         resource_ids: {
           account_ids: [{ account_id: '' }],
-          statement_ids: [{ statement_id: '' }],
+          statement_ids: [],
         },
         creditor_account: {
           scheme_name: '',
@@ -387,7 +387,7 @@ describe('web/src/store/modules/config', () => {
         redirect_url: 'https://127.0.0.1:8443/conformancesuite/callback',
         resource_ids: {
           account_ids: [{ account_id: '' }],
-          statement_ids: [{ statement_id: '' }],
+          statement_ids: [],
         },
         creditor_account: {
           scheme_name: '',
@@ -442,7 +442,7 @@ describe('web/src/store/modules/config', () => {
         redirect_url: 'https://127.0.0.1:8443/conformancesuite/callback',
         resource_ids: {
           account_ids: [{ account_id: '' }],
-          statement_ids: [{ statement_id: '' }],
+          statement_ids: [],
         },
         creditor_account: {
           scheme_name: '',
@@ -497,7 +497,7 @@ describe('web/src/store/modules/config', () => {
         redirect_url: 'https://127.0.0.1:8443/conformancesuite/callback',
         resource_ids: {
           account_ids: [{ account_id: '' }],
-          statement_ids: [{ statement_id: '' }],
+          statement_ids: [],
         },
         creditor_account: {
           scheme_name: '',
@@ -552,7 +552,7 @@ describe('web/src/store/modules/config', () => {
         redirect_url: 'https://127.0.0.1:8443/conformancesuite/callback',
         resource_ids: {
           account_ids: [{ account_id: '' }],
-          statement_ids: [{ statement_id: '' }],
+          statement_ids: [],
         },
         creditor_account: {
           scheme_name: '',
@@ -607,7 +607,7 @@ describe('web/src/store/modules/config', () => {
         redirect_url: 'https://127.0.0.1:8443/conformancesuite/callback',
         resource_ids: {
           account_ids: [{ account_id: '' }, { account_id: 'account-id' }],
-          statement_ids: [{ statement_id: '' }],
+          statement_ids: [],
         },
         creditor_account: {
           scheme_name: '',
@@ -662,7 +662,7 @@ describe('web/src/store/modules/config', () => {
         redirect_url: 'https://127.0.0.1:8443/conformancesuite/callback',
         resource_ids: {
           account_ids: [{ account_id: '' }, { account_id: 'account-id' }],
-          statement_ids: [{ statement_id: '' }, { statement_id: 'statement-id' }],
+          statement_ids: [{ statement_id: 'statement-id' }],
         },
         creditor_account: {
           scheme_name: '',
@@ -723,7 +723,7 @@ describe('web/src/store/modules/config', () => {
         redirect_url: 'https://127.0.0.1:8443/conformancesuite/callback',
         resource_ids: {
           account_ids: [{ account_id: '' }],
-          statement_ids: [{ statement_id: '' }],
+          statement_ids: [],
         },
         creditor_account: {
           scheme_name: '',
@@ -780,7 +780,7 @@ describe('web/src/store/modules/config', () => {
         redirect_url: 'https://127.0.0.1:8443/conformancesuite/callback',
         resource_ids: {
           account_ids: [{ account_id: '123' }, { account_id: '456' }],
-          statement_ids: [{ statement_id: '' }],
+          statement_ids: [],
         },
         creditor_account: {
           scheme_name: '',
@@ -957,7 +957,7 @@ describe('web/src/store/modules/config', () => {
           redirect_url: 'https://127.0.0.1:8443/conformancesuite/callback',
           resource_ids: {
             account_ids: [{ account_id: '' }],
-            statement_ids: [{ statement_id: '' }],
+            statement_ids: [],
           },
           creditor_account: {
             scheme_name: '',
@@ -1054,7 +1054,7 @@ describe('web/src/store/modules/config', () => {
           redirect_url: 'https://127.0.0.1:8443/conformancesuite/callback',
           resource_ids: {
             account_ids: [{ account_id: '' }],
-            statement_ids: [{ statement_id: '' }],
+            statement_ids: [],
           },
           creditor_account: {
             scheme_name: '',
@@ -1093,6 +1093,7 @@ describe('web/src/store/modules/config', () => {
       it('setConfigurationSigningPrivate not called before validateConfiguration', async () => {
         const store = createRealStore();
 
+        await actions.setDiscoveryModel(store, '')
         await actions.setConfigurationSigningPublic(store, 'setConfigurationSigningPublic');
         await actions.setConfigurationTransportPrivate(store, 'setConfigurationTransportPrivate');
         await actions.setConfigurationTransportPublic(store, 'setConfigurationTransportPublic');
@@ -1103,7 +1104,7 @@ describe('web/src/store/modules/config', () => {
         const errors = [
           'Signing Private Certificate (.key) empty',
           'Account IDs empty',
-          'Statement IDs empty',
+          // 'Statement IDs empty',
           'Transaction From Date empty',
           'Transaction To Date empty',
           'Client ID empty',
@@ -1132,7 +1133,7 @@ describe('web/src/store/modules/config', () => {
         const errors = [
           'Signing Public Certificate (.pem) empty',
           'Account IDs empty',
-          'Statement IDs empty',
+          // 'Statement IDs empty',
           'Transaction From Date empty',
           'Transaction To Date empty',
           'Client ID empty',
@@ -1161,7 +1162,6 @@ describe('web/src/store/modules/config', () => {
         const errors = [
           'Transport Private Certificate (.key) empty',
           'Account IDs empty',
-          'Statement IDs empty',
           'Transaction From Date empty',
           'Transaction To Date empty',
           'Client ID empty',
@@ -1190,7 +1190,6 @@ describe('web/src/store/modules/config', () => {
         const errors = [
           'Transport Public Certificate (.pem) empty',
           'Account IDs empty',
-          'Statement IDs empty',
           'Transaction From Date empty',
           'Transaction To Date empty',
           'Client ID empty',
@@ -1218,7 +1217,6 @@ describe('web/src/store/modules/config', () => {
           'Transport Private Certificate (.key) empty',
           'Transport Public Certificate (.pem) empty',
           'Account IDs empty',
-          'Statement IDs empty',
           'Transaction From Date empty',
           'Transaction To Date empty',
           'Client ID empty',
@@ -1321,7 +1319,6 @@ describe('web/src/store/modules/config', () => {
           'Transport Private Certificate (.key) empty',
           'Transport Public Certificate (.pem) empty',
           'Account IDs empty',
-          'Statement IDs empty',
           'Transaction From Date empty',
           'Transaction To Date empty',
           'Client ID empty',

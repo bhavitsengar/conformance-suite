@@ -1093,7 +1093,7 @@ describe('web/src/store/modules/config', () => {
       it('setConfigurationSigningPrivate not called before validateConfiguration', async () => {
         const store = createRealStore();
 
-        await actions.setDiscoveryModel(store, '')
+        await actions.setDiscoveryModel(store, '');
         await actions.setConfigurationSigningPublic(store, 'setConfigurationSigningPublic');
         await actions.setConfigurationTransportPrivate(store, 'setConfigurationTransportPrivate');
         await actions.setConfigurationTransportPublic(store, 'setConfigurationTransportPublic');

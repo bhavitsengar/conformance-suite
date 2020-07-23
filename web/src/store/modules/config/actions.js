@@ -12,9 +12,9 @@ const findImageData = (model, images) => {
 
 
 function isDiscoveryWithStatement(state) {
-  const discoveryModel = state.discoveryModel
+  const { discoveryModel } = state.discoveryModel;
   if (!discoveryModel || !discoveryModel.discoveryModel) {
-    // The only valid case for discoveryModel not being set is during testing 
+    // The only valid case for discoveryModel not being set is during testing
     return false;
   }
 

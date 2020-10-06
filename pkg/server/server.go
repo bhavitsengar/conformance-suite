@@ -83,6 +83,7 @@ func registerRoutes(journey Journey, server *Server, logger *logrus.Entry, versi
 	// endpoint to post global configuration
 	api.POST("/config/global", configHandlers.configGlobalPostHandler)
 	api.GET("/config/conditional-property", configHandlers.configConditionalPropertyHandler)
+	api.GET("/config/fields", configHandlers.configFieldsHandler)
 
 	// endpoints for discovery model
 	discoveryHandlers := newDiscoveryHandlers(journey, logger)

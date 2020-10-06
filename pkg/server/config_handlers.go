@@ -8,6 +8,7 @@ import (
 	"regexp"
 	"time"
 
+	"bitbucket.org/openbankingteam/conformance-suite/pkg/configinput"
 	"bitbucket.org/openbankingteam/conformance-suite/pkg/discovery"
 	"bitbucket.org/openbankingteam/conformance-suite/pkg/server/models"
 	"gopkg.in/resty.v1"
@@ -26,8 +27,8 @@ import (
 type ResponseType = interface{}
 
 // responseTypesSupported REQUIRED. JSON array containing a list of the OAuth 2.0 response_type values that this OP supports. Dynamic OpenID Providers MUST support the code, id_token, and the token id_token Response Type values
-func responseTypesSupported() [3]ResponseType {
-	return [3]ResponseType{
+func responseTypesSupported() []ResponseType {
+	return []ResponseType{
 		"code",
 		"code id_token",
 		"id_token",
@@ -170,6 +171,20 @@ func (h configHandlers) configConditionalPropertyHandler(c echo.Context) error {
 		}
 	}
 	return c.JSON(http.StatusOK, filteredProps)
+}
+
+// GET /api/config/fields
+func (h configHandlers) configFieldsHandler(c echo.Context) error {
+	discovery, err := h.journey.DiscoveryModel()
+	if err != nil {
+		return c.JSON(http.StatusNotFound, NewErrorResponse(err))
+	}
+
+	fields := configinput.FieldRules(&discovery.DiscoveryModel)
+	if err := c.JSON(http.StatusOK, fields); err != nil {
+		return err
+	}
+	return nil
 }
 
 // POST /api/config/global

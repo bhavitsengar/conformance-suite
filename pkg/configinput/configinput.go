@@ -1,3 +1,5 @@
+// Package configinput is a tool for finding out what configuration input fields are required to be
+// displayed to the tester, based on the contents of the provided discovery file/structure.
 package configinput
 
 import (

@@ -60,11 +60,12 @@ func FieldRules(discovery *discovery.ModelDiscovery) []Field {
 }
 
 func mergeConfigFields(existingFields []Field, newFields ...Field) []Field {
+NextNew:
 	for _, newField := range newFields {
 		for _, ef := range existingFields {
 			if ef.FieldNameJSON == newField.FieldNameJSON {
-				// update the existing if the new is stricter
-				return existingFields
+				// TODO: update the existing if the new is stricter (not a use case now, but the right thing to do)
+				continue NextNew
 			}
 		}
 
@@ -85,7 +86,7 @@ var (
 		{"client_id", Rule{Required: true}},
 		{"x_fapi_financial_id", Rule{Required: true}},
 		{"x_fapi_customer_ip_address", Rule{Required: true}}, // Optional, but needs to be rendered.
-		{"transaction_from_date", Rule{Required: true}},      // Only when headless is used.. tbd: what cases?
+		{"transaction_from_date", Rule{Required: true}},      // Only when headless is used.. tbd: what cases use headless?
 		{"transaction_to_date", Rule{Required: true}},        // ditto
 		{"use_eidas_cert", Rule{Required: true}},
 		{"eidas_signing_kid", Rule{Condition: &CustomCondition{"if", []string{"use_eidas_cert"}}}},

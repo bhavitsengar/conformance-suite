@@ -1769,8 +1769,8 @@
         "accountId": "$consentedAccountId"
       },
       "queryParameters": {
-        "fromBookingDateTime": "2020-04-23T15:47:00",
-        "toBookingDateTime": "2020-04-23T15:48:00"
+        "fromBookingDateTime": "$transactionFromDate",
+        "toBookingDateTime": "$transactionToDate"
       },
       "permissions": [
         "ReadAccountsBasic",
@@ -1800,8 +1800,8 @@
         "accountId": "$consentedAccountId"
       },
       "queryParameters": {
-        "fromBookingDateTime": "2020-04-23T15:47:00.999",
-        "toBookingDateTime": "2020-04-23T15:48:00.999"
+        "fromBookingDateTime": "$transactionFromDate",
+        "toBookingDateTime": "$transactionToDate"
       },
       "permissions": [
         "ReadAccountsBasic",

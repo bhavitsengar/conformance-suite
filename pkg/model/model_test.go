@@ -226,3 +226,38 @@ func TestGetReplacementField(t *testing.T) {
 	}
 
 }
+
+var replacementTestCase = []byte(`
+	{
+        "@id": "#t1008",
+        "name": "Get a list of accounts",
+        "input": {
+            "method": "GET",
+            "endpoint": "/accounts",
+			"queryParameters":{
+				"fromStatementDateTime": "$transactionFromDate"
+			},
+			"headers": {
+			     "x-fapi-interaction-id": "$x-fapi-interaction-id"
+			}
+        },
+        "context": {
+			"baseurl":"http://myaspsp"
+	    },
+        "expect": {
+            "status-code": 200,
+            "schema-validation": true
+        }
+    }
+	`)
+
+func TestProcessReplacementFields(t *testing.T) {
+	var tc TestCase
+	err := json.Unmarshal(replacementTestCase, &tc)
+	assert.NoError(t, err)
+	ctx := &Context{}
+	ctx.Put("transactionFromDate", "NICE_DATE")
+	tc.ProcessReplacementFields(ctx, true)
+
+	assert.Equal(t, "NICE_DATE", tc.Input.QueryParameters["fromStatementDateTime"])
+}

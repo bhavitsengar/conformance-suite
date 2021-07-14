@@ -36,7 +36,7 @@ type Manifest struct {
 
 // Rule - Define a specific location within a specification that is being tested
 // Rule also identifies all the tests that must be passed in order to show that the rule
-// implementation in conformant with the specific section in the referenced specification
+// implementation conforms with the specific section in the referenced specification
 type Rule struct {
 	ID           string       `json:"@id"`             // JSONLD ID reference
 	Type         []string     `json:"@type,omitempty"` // JSONLD type reference
@@ -162,7 +162,7 @@ func (t *TestCase) Validate(resp *resty.Response, ctx *Context) (bool, []error) 
 		if !valid {
 			errs = append(errs, errors.New("Invalid x-jws-signature found - unable to validate"))
 		} else {
-			logrus.Infoln("x-jws-signature validation succeded")
+			logrus.Infoln("x-jws-signature validation succeeded")
 		}
 	}
 
@@ -193,7 +193,7 @@ func validateSignature(signature, body string, ctx *Context) (bool, error) {
 		if !pass {
 			return false, errors.New("Invalid x-jws-signature - fails validation")
 		} else {
-			logrus.Infoln("x-jws-signature validation succeded")
+			logrus.Infoln("x-jws-signature validation succeeded")
 		}
 	} else {
 		return false, errors.New("x-jws-signature header not found for Validation")
@@ -522,6 +522,7 @@ func (t *TestCase) ProcessReplacementFields(ctx *Context, showReplacementErrors 
 
 	t.processReplacementFormData(ctx)
 	t.processReplacementHeaders(ctx, logger, showReplacementErrors)
+	t.processReplacementQueryParameters(ctx, logger, showReplacementErrors)
 	t.processReplacementClaims(ctx)
 
 	// If customer ip value is not set, remove it from headers
@@ -578,6 +579,17 @@ func (t *TestCase) processReplacementHeaders(ctx *Context, logger *logrus.Logger
 		t.Input.Headers[k], err = replaceContextField(t.Input.Headers[k], ctx)
 		if err != nil {
 			field := fmt.Sprintf("Headers[%s]", k)
+			t.logReplaceError(field, err, logger, showReplacementErrors)
+		}
+	}
+}
+
+func (t *TestCase) processReplacementQueryParameters(ctx *Context, logger *logrus.Logger, showReplacementErrors bool) {
+	var err error
+	for k := range t.Input.QueryParameters {
+		t.Input.QueryParameters[k], err = replaceContextField(t.Input.QueryParameters[k], ctx)
+		if err != nil {
+			field := fmt.Sprintf("QueryParameters[%s]", k)
 			t.logReplaceError(field, err, logger, showReplacementErrors)
 		}
 	}

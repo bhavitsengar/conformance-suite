@@ -27,7 +27,7 @@ on Pro or Enterprise versions. Please refer to [this guide](https://techcommunit
 
 Ozone Bank is an Mock Account Servicing Payment Service Provider (ASPSP), which the FCS will connect to as a TPP.
 
-In order to register a new client you need to use [Dynamic Client Registration Protocol](https://openbanking.atlassian.net/wiki/spaces/DZ/pages/1078034771/Dynamic+Client+Registration+-+v3.2). Please follow the steps described in this page to register a new client with Ozone [https://openbanking.atlassian.net/wiki/spaces/DZ/pages/313918598/Integrating+a+TPP+with+Ozone+Model+Banks+Using+Postman+on+Directory+Sandbox](https://openbanking.atlassian.net/wiki/spaces/DZ/pages/313918598/Integrating+a+TPP+with+Ozone+Model+Banks+Using+Postman+on+Directory+Sandbox) 
+In order to register a new client you need to use [Dynamic Client Registration Protocol](https://openbanking.atlassian.net/wiki/spaces/DZ/pages/1078034771/Dynamic+Client+Registration+-+v3.2). Please follow the steps described in this page to register a new client with Ozone [https://openbanking.atlassian.net/wiki/spaces/DZ/pages/313918598/Integrating+a+TPP+with+Ozone+Model+Banks+Using+Postman+on+Directory+Sandbox](https://openbanking.atlassian.net/wiki/spaces/DZ/pages/313918598/Integrating+a+TPP+with+Ozone+Model+Banks+Using+Postman+on+Directory+Sandbox)
 
 Once completed, make a note of the certificates and the `CLIENT ID` and `CLIENT SECRET` values.
 
@@ -93,7 +93,7 @@ at this point by running `docker login`.
 ### Production
 
 ```sh
-docker run --rm -it -p 8443:8443 -e LOG_LEVEL=debug -e LOG_TRACER=true -e LOG_HTTP_TRACE=true "openbanking/conformance-suite:v1.6.3"
+docker run --rm -it -p 127.0.0.1:8443:8443 -e LOG_LEVEL=debug -e LOG_TRACER=true -e LOG_HTTP_TRACE=true "openbanking/conformance-suite:v1.6.3"
 ```
 
 *Please substitute the container version (1.6.3 in this example) with the version of the latest stable release.*
@@ -101,13 +101,13 @@ docker run --rm -it -p 8443:8443 -e LOG_LEVEL=debug -e LOG_TRACER=true -e LOG_HT
 ### Production - JWS signatures disabled (for testing purposes only)
 
 ```sh
-docker run --rm -it -p 8443:8443 -e LOG_LEVEL=debug -e LOG_TRACER=true -e LOG_HTTP_TRACE=true -e DISABLE_JWS=TRUE "openbanking/conformance-suite:v1.6.3"
+docker run --rm -it -p 127.0.0.1:8443:8443 -e LOG_LEVEL=debug -e LOG_TRACER=true -e LOG_HTTP_TRACE=true -e DISABLE_JWS=TRUE "openbanking/conformance-suite:v1.6.3"
 ```
 
 ### Non-production run
 
 ```sh
-docker run --rm -it -p 8443:8443 -e LOG_LEVEL=debug -e LOG_TRACER=true -e LOG_HTTP_TRACE=true -e DISABLE_JWS=TRUE "openbanking/conformance-suite:latest"
+docker run --rm -it -p 127.0.0.1:8443:8443 -e LOG_LEVEL=debug -e LOG_TRACER=true -e LOG_HTTP_TRACE=true -e DISABLE_JWS=TRUE "openbanking/conformance-suite:latest"
 ```
 
 If all goes well you should be able to launch the FCS UI from you browser via `https://0.0.0.0:8443`
@@ -155,7 +155,7 @@ Select the Ozone PSU template.
 
 ### Configuration
 * Client
-	* Provide the keys, as created earlier signing and transport (first 4 boxes) 
+	* Provide the keys, as created earlier signing and transport (first 4 boxes)
 	* Account ID: `500000000000000000000001`
 	* Statement ID: `140000000000000000000001`
 	* Transaction _from_/_to_ dates: _pre-populated value ok_

@@ -28,6 +28,12 @@ The release is called **v1.6.8**, an update to support version 3.1.7 of the AIS,
 
 Pull and run the latest (stable) tagged Docker image:
 
+Listening on localhost only:
+
+    > docker run --rm -it -p 127.0.01:8443:8443 "openbanking/conformance-suite:v1.6.8"
+
+Listening on all available IPs:
+
     > docker run --rm -it -p 8443:8443 "openbanking/conformance-suite:v1.6.8"
 
 [See Setup Guide](https://bitbucket.org/openbankingteam/conformance-suite/src/develop/docs/setup-guide.md)

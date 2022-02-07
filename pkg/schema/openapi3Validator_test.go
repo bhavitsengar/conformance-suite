@@ -63,13 +63,13 @@ func TestVrpRoutes(t *testing.T) {
 		method string
 		url    string
 	}{
-		{"POST", "/open-banking/v3.1/vrp/domestic-vrp-consents"},
-		{"GET", "/open-banking/v3.1/vrp/domestic-vrp-consents/10001"},
-		{"DELETE", "/open-banking/v3.1/vrp/domestic-vrp-consents/10002"},
-		{"POST", "/open-banking/v3.1/vrp/domestic-vrp-consents/10003/funds-confirmation"},
-		{"POST", "/open-banking/v3.1/vrp/domestic-vrps"},
-		{"GET", "/open-banking/v3.1/vrp/domestic-vrps/10004"},
-		{"GET", "/open-banking/v3.1/vrp/domestic-vrps/10005/payment-details"},
+		{"POST", "/open-banking/v3.1/pisp/domestic-vrp-consents"},
+		{"GET", "/open-banking/v3.1/pisp/domestic-vrp-consents/10001"},
+		{"DELETE", "/open-banking/v3.1/pisp/domestic-vrp-consents/10002"},
+		{"POST", "/open-banking/v3.1/pisp/domestic-vrp-consents/10003/funds-confirmation"},
+		{"POST", "/open-banking/v3.1/pisp/domestic-vrps"},
+		{"GET", "/open-banking/v3.1/pisp/domestic-vrps/10004"},
+		{"GET", "/open-banking/v3.1/pisp/domestic-vrps/10005/payment-details"},
 	}
 
 	validator, err := NewRawOpenAPI3Validator("OBIE VRP Profile", "v3.1.8")

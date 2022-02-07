@@ -185,7 +185,7 @@ const acc10000response = `{
 	}
 }`
 
-const vrp100200ReqURL = "/open-banking/v3.1/vrp/domestic-vrp-consents/vrp-8ba1c1a1-6ffd-43fa-aac0-c1d1f8524f5d"
+const vrp100200ReqURL = "/open-banking/v3.1/pisp/domestic-vrp-consents/vrp-8ba1c1a1-6ffd-43fa-aac0-c1d1f8524f5d"
 
 const vrp100200Response = `{
 	"Data": {
